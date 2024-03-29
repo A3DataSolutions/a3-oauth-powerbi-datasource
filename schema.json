@@ -1,0 +1,29 @@
+{
+  "type": "datasource",
+  "metadata": {},
+  "schema": {
+    "docs": "https://docs.budibase.com",
+    "friendlyName": "Power BI",
+    "type": "API",
+    "description": "Performs OAuth handshake to retreive Power BI Embed Token",
+    "datasource": {
+      "clientId": {
+        "type": "string",
+        "required": true
+      },
+      "clientSecret":{
+        "type": "string",
+        "required": true
+      },
+      "tenantId":{
+        "type": "string",
+        "required": true
+      }
+    },
+    "query": {
+      "read": {
+        "type": "json"
+      }
+    }
+  }
+}
