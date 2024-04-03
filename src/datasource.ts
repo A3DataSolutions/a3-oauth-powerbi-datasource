@@ -72,6 +72,12 @@ class CustomIntegration implements IntegrationBase {
     embedToken["servicePrincipalAccessToken"]=accessToken
     return embedToken
   }
+
+  async timer(query: { timer: number }){
+    await new Promise(r => setTimeout(r, query.timer));
+    return 'Complete'
+
+  }
 }
 
 export default CustomIntegration

@@ -23,7 +23,17 @@
     "query": {
       "read": {
         "type": "json"
+      },
+      "timer": {
+        "type": "fields",
+        "fields": {
+          "timer": {
+            "type": "number",
+            "required": true
+          }
+        }
       }
     }
+   
   }
 }
