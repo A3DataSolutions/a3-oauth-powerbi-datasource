@@ -61,7 +61,7 @@ class CustomIntegration implements IntegrationBase {
     }).then(async function (res) {
       if (!res.ok) {
         const errorResponse = await res.text();
-        throw new Error(`Network response was not ok: ` + res.statusText);
+        throw new Error(`Network response was not ok: ` + errorResponse);
       }
       return res.json(); // Parse JSON response
     })
