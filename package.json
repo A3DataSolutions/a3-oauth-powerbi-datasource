@@ -1,6 +1,6 @@
 {
   "name": "a3-oauth-powerbi-datasource",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A datasource which handles OAuth for Power BI embed",
   "main": "src/index.ts",
   "license": "MIT",
