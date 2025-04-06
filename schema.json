@@ -32,8 +32,24 @@
             "required": true
           }
         }
+      },
+      "refresh_dataset_in_group": {
+        "type": "fields",
+        "fields": {
+          "group": {
+            "type": "string",
+            "required": true
+          },
+          "dataset": {
+            "type": "string",
+            "required": true
+          },
+          "body": {
+            "type": "json",
+            "required": true
+          }
+        }
       }
     }
-   
   }
 }

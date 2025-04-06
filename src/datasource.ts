@@ -73,10 +73,64 @@ class CustomIntegration implements IntegrationBase {
     return embedToken
   }
 
+
+
+
   async timer(query: { timer: number }){
     await new Promise(r => setTimeout(r, query.timer));
     return 'Complete'
 
+  }
+
+  async refresh_dataset_in_group(query: { group: string, dataset: string, body: object } ) {
+
+    const clientConfig = {
+      auth: {
+        clientId: this.clientId,
+        authority: "https://login.microsoftonline.com/" + this.tenantId,
+        clientSecret: this.clientSecret
+      },
+    };
+
+    async function getToken() {
+      const clientApplication = new msal.ConfidentialClientApplication(
+        clientConfig,
+      );
+
+      const clientCredentialRequest = {
+        scopes: ["https://analysis.windows.net/powerbi/api/.default"],
+      };
+      return clientApplication.acquireTokenByClientCredential(clientCredentialRequest);
+
+    }
+
+    let accessTokenResponse = await getToken()
+    let accessToken = accessTokenResponse!.accessToken
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + accessToken
+    };
+
+
+    // Make the POST request to generate the embed token
+    let res = await fetch(`https://api.powerbi.com/v1.0/myorg/groups/${query.group}/datasets/${query.dataset}/refreshes`, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(query.body)
+    }).then(async function (res) {
+      if (!res.ok) {
+        const errorResponse = await res.text();
+        throw new Error(`Network response was not ok: TEST ` + errorResponse);
+      }
+      return res; // Parse JSON response
+    })
+      // then print JSON data that was parsed
+      .then(function (data) {
+        return data;
+      });
+    
+    return res
   }
 }
 
